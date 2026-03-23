@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TrackFit</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+    }
+
+    header {
+      padding: 15px;
+      text-align: center;
+      background: #020617;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .container {
+      padding: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background: #22c55e;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .card {
+      background: #020617;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 5px;
+      border-radius: 8px;
+      padding: 10px;
+      border: none;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      background: #020617;
+    }
+
+    nav button {
+      flex: 1;
+      border-radius: 0;
+      background: #020617;
+      color: white;
+      border-top: 1px solid #1e293b;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>TrackFit</header>
+
+<div class="container" id="app"></div>
+
+<nav>
+  <button onclick="showHome()">Home</button>
+  <button onclick="showTreino()">Treino</button>
+  <button onclick="showHistorico()">Histórico</button>
+</nav>
+
+<script>
+
+let treinoAtual = "A";
+
+const treinos = {
+  A: ["Cross", "Supino Reto Halter", "Supino Inclinado", "Chest Press"],
+  B: ["Pulldown", "Pullover", "Remada Curvada", "Remada Baixa"],
+  C: ["Extensora", "Leg Press", "Agachamento", "Flexora"],
+  D: ["Desenvolvimento", "Elevação Lateral", "Rosca Direta", "Tríceps"]
+};
+
+function showHome() {
+  document.getElementById("app").innerHTML = `
+    <h2>Hoje: Treino ${treinoAtual}</h2>
+    <button onclick="showTreino()">Iniciar Treino</button>
+  `;
+}
+
+function showTreino() {
+  let html = `<h2>Treino ${treinoAtual}</h2>`;
+
+  treinos[treinoAtual].forEach((ex, i) => {
+    html += `
+      <div class="card">
+        <strong>${ex}</strong>
+        <input placeholder="Carga (kg)" id="carga${i}">
+        <input placeholder="Reps" id="reps${i}">
+        <textarea placeholder="Observações"></textarea>
+      </div>
+    `;
+  });
+
+  html += `<button onclick="salvar()">Salvar Treino</button>`;
+
+  document.getElementById("app").innerHTML = html;
+}
+
+function salvar() {
+  alert("Treino salvo (versão inicial)");
+}
+
+function showHistorico() {
+  document.getElementById("app").innerHTML = `
+    <h2>Histórico</h2>
+    <p>Em desenvolvimento...</p>
+  `;
+}
+
+showHome();
+
+</script>
+
+</body>
+</html>
